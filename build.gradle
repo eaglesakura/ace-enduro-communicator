@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+configurations {
+    apt
+
+    all*.exclude group: "com.google.code.findbugs", module: "jsr305"
+    all*.exclude group: "com.eaglesakura", module: "eglibrary-java-geo"
+    all*.exclude group: "com.eaglesakura", module: "eglibrary-android-java-core"
+}
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.eaglesakura.andriders.enduro"
+        minSdkVersion 18
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src/main/generated/dao', 'src/main/generated/protobuf', 'src/main/generated/props', 'src/main/java']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile project(':eglibrary-java-geo')
+    compile project(':eglibrary-android-framework')
+    compile project(':ace-sdk')
+
+    // Android Annotations
+    apt "org.androidannotations:androidannotations:3.0.+"
+    compile 'org.androidannotations:androidannotations-api:3.0.+'
+}
