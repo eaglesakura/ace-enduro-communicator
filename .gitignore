@@ -1,1 +1,13 @@
-/build
+ci-release/
+.idea/
+*.iml
+build/
+bin
+gen
+.DS_Store
+local.properties
+obj/
+*.o
+*.o.d
+*.so
+.gradle/

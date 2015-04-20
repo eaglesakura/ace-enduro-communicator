@@ -1,2 +1,2 @@
-# ace-enduro-communicator
+# ACE Enduro Communicator
 for GSR CUP(Andriders)
