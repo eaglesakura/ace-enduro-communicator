@@ -18,25 +18,44 @@ public class MessageIntentBuilder {
     /**
      * 相手端末で表示を行うためのIntent
      */
-    RemoteIntentBuilder bootIntentBuilder;
+    final RemoteIntentBuilder bootIntentBuilder;
 
     final Context context;
 
     private MessageIntentBuilder(Context context) {
         this.context = context;
+        bootIntentBuilder = RemoteIntentBuilder.newService(context, ReceivedMessageProxyService.class, ReceivedMessageProxyService.ACTION_SHOW_MESSAGE);
     }
 
     /**
-     * 遠隔端末にToastを表示させる
+     * 遠隔端末に表示するメッセージを指定
      *
      * @param message
      *
      * @return
      */
-    public MessageIntentBuilder toast(String message) {
-        bootIntentBuilder = RemoteIntentBuilder.newService(context, AnnotationUtil.annotation(EnduroExtensionService.class), EnduroExtensionService.ACTION_SHOW_TOAST);
-        bootIntentBuilder.putExtra(EnduroExtensionService.EXTRA_MESSAGE, message);
+    public MessageIntentBuilder message(String message) {
+        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_MESSAGE, message);
+        return this;
+    }
 
+    /**
+     * ダイアログとして表示する
+     *
+     * @return
+     */
+    public MessageIntentBuilder enableDialog() {
+        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_BOOT_DIALOG, true);
+        return this;
+    }
+
+    /**
+     * ステータスバーを表示する
+     *
+     * @return
+     */
+    public MessageIntentBuilder enableStatusbar() {
+        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_NOTIFICATION_STATUSBAR, true);
         return this;
     }
 

@@ -36,24 +36,6 @@ public class EnduroExtensionService extends AcesExtensionService {
 
 
     /**
-     * Toast表示を行わせる
-     */
-    public static final String ACTION_SHOW_TOAST = "com.eaglesakura.enduro.ACTION_SHOW_TOAST";
-
-
-    /**
-     * 表示するメッセージ
-     */
-    public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-
-    /**
-     * Toast起動を行う。
-     * <p/>
-     * ユーザーが操作しなくても画面から消える
-     */
-    public static final int BOOT_MODE_TOAST = 2;
-
-    /**
      * メンバーIDを示す
      */
     public static final String EXTRA_MEMBER_ID = "EXTRA_MEMBER_ID";
@@ -91,9 +73,6 @@ public class EnduroExtensionService extends AcesExtensionService {
                 // 送信対象が接続されている
                 sendIntentToMembers(Arrays.asList(userId), intent);
             }
-        } else if (ACTION.equals(ACTION_SHOW_TOAST)) {
-            // 別端末から送られてきたメッセージに従い、Toastを表示する
-            showToast(intent);
         }
 
         return super.onStartCommand(intent, flags, startId);
@@ -121,19 +100,6 @@ public class EnduroExtensionService extends AcesExtensionService {
         } catch (Exception e) {
             LogUtil.log(e);
         }
-    }
-
-    /**
-     * 指定された内容のToastを表示する
-     *
-     * @param intent
-     */
-    void showToast(Intent intent) {
-        String message = intent.getStringExtra(EXTRA_MESSAGE);
-        AndroidUtil.playDefaultNotification(this);
-
-        // TODO Toastの表示をわかりやすくする
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     @Override

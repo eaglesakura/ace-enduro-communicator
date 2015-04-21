@@ -16,6 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- ダイアログを強制表示するActivity -->
+        <activity android:name="com.eaglesakura.andriders.enduro.DialogActivity">
+            <!-- Debug -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 送信メッセージを指定するTrigger用Activity -->
         <activity android:name="com.eaglesakura.andriders.enduro.MessageSettingActivity_">
             <!-- acetrigger://で起動する -->
             <intent-filter>
@@ -30,11 +40,15 @@
             </intent-filter>
         </activity>
 
+        <!-- 通知を設定するService -->
+        <service android:name="com.eaglesakura.andriders.enduro.ReceivedMessageProxyService"/>
+
+        <!-- ACE常駐Service -->
         <service
             android:name="com.eaglesakura.andriders.enduro.EnduroExtensionService_"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.eaglesakura.andriders.ACTION_ACE_EXTENSION"/>
+                <action android:name="com.eaglesakura.andriders.ACTION_ACE_EXTENSION_BIND"/>
             </intent-filter>
         </service>
     </application>

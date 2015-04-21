@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.eaglesakura.andriders.command.CommandSetupResultBuilder;
-import com.eaglesakura.andriders.protocol.CommandProtocol;
 import com.eaglesakura.android.framework.support.ui.BaseActivity;
 
 import org.androidannotations.annotations.Click;
@@ -37,7 +36,7 @@ public class MessageSettingActivity extends BaseActivity {
         // ACEsに起動させるIntentを組み立てる
         {
             MessageIntentBuilder intentBuilder = MessageIntentBuilder.newTriggerMessage(this);
-            intentBuilder.toast(getInputMessage());
+            intentBuilder.message(getInputMessage());
             builder.intent(intentBuilder.build());
         }
 
