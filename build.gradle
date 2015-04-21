@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 configurations {
     apt
@@ -6,6 +7,16 @@ configurations {
     all*.exclude group: "com.google.code.findbugs", module: "jsr305"
     all*.exclude group: "com.eaglesakura", module: "eglibrary-java-geo"
     all*.exclude group: "com.eaglesakura", module: "eglibrary-android-java-core"
+}
+
+dependencies {
+    compile project(':eglibrary-java-geo')
+    compile project(':eglibrary-android-framework')
+    compile project(':ace-sdk')
+
+    // Android Annotations
+    apt "org.androidannotations:androidannotations:3.0.+"
+    compile 'org.androidannotations:androidannotations-api:3.0.+'
 }
 
 android {
@@ -40,14 +51,4 @@ android {
         exclude 'services/com.fasterxml.jackson.core.JsonFactory'
         exclude 'services/com.fasterxml.jackson.core.ObjectCodec'
     }
-}
-
-dependencies {
-    compile project(':eglibrary-java-geo')
-    compile project(':eglibrary-android-framework')
-    compile project(':ace-sdk')
-
-    // Android Annotations
-    apt "org.androidannotations:androidannotations:3.0.+"
-    compile 'org.androidannotations:androidannotations-api:3.0.+'
 }

@@ -4,11 +4,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/App.Theme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.eaglesakura.andriders.enduro.MainActivity_"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -16,11 +16,23 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name="com.eaglesakura.andriders.enduro.MessageSettingActivity_">
+            <!-- acetrigger://で起動する -->
+            <intent-filter>
+                <data android:scheme="acestrigger"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- Debug -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
 
         <service
-            android:name="com.eaglesakura.andriders.enduro.EnduroExtensionService"
-            android:exported="true"
-            >
+            android:name="com.eaglesakura.andriders.enduro.EnduroExtensionService_"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.eaglesakura.andriders.ACTION_ACE_EXTENSION"/>
             </intent-filter>

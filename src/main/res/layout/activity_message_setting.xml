@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="?attr/esmWindowBackgroundColorDark"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        style="@style/EsMaterial.CardView.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="@dimen/EsMaterial.Button.Margin"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                style="@style/EsMaterial.Font.Title.Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="送信メッセージ"/>
+
+            <TextView
+                android:layout_marginLeft="@dimen/EsMaterial.Margin.KeyLine1Horizontal"
+                style="@style/EsMaterial.Font.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="チーム走行中の全員にメッセージを送信します。\n送信可能な文字数は140文字以内です。"/>
+
+            <EditText
+                android:id="@+id/Trigger.InputMessage.Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/EsMaterial.Button.MinHeight"
+                android:maxLength="140"
+                android:text="交代準備をお願いします！"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:id="@+id/Trigger.InputMessage.Commit"
+        style="@style/EsMaterial.Button.LightGreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="確定"/>
+</LinearLayout>
