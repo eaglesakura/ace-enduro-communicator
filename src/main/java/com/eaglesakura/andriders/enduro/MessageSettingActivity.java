@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.eaglesakura.andriders.command.CommandSetupResultBuilder;
+import com.eaglesakura.andriders.enduro.data.MessageIntentBuilder;
 import com.eaglesakura.android.framework.support.ui.BaseActivity;
 
 import org.androidannotations.annotations.Click;

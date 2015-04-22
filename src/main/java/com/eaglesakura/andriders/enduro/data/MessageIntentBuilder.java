@@ -1,10 +1,14 @@
-package com.eaglesakura.andriders.enduro;
+package com.eaglesakura.andriders.enduro.data;
 
 import android.content.Context;
+import android.util.Base64;
 
 import com.eaglesakura.andriders.command.RemoteIntentBuilder;
+import com.eaglesakura.andriders.enduro.EnduroExtensionService;
+import com.eaglesakura.andriders.enduro.ReceiveMessageActivity;
 import com.eaglesakura.andriders.protocol.CommandProtocol;
 import com.eaglesakura.android.annotations.AnnotationUtil;
+import com.eaglesakura.util.StringUtil;
 
 /**
  * 送信用のRemoteIntentを組み立てる
@@ -24,7 +28,7 @@ public class MessageIntentBuilder {
 
     private MessageIntentBuilder(Context context) {
         this.context = context;
-        bootIntentBuilder = RemoteIntentBuilder.newService(context, ReceivedMessageProxyService.class, ReceivedMessageProxyService.ACTION_SHOW_MESSAGE);
+        bootIntentBuilder = RemoteIntentBuilder.newActivity(context, AnnotationUtil.annotation(ReceiveMessageActivity.class), ReceiveMessageActivity.ACTION_SHOW_MESSAGE);
     }
 
     /**
@@ -35,7 +39,7 @@ public class MessageIntentBuilder {
      * @return
      */
     public MessageIntentBuilder message(String message) {
-        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_MESSAGE, message);
+        bootIntentBuilder.putExtra(ReceiveMessageActivity.EXTRA_DIALOG_MESSAGE, message);
         return this;
     }
 
@@ -45,7 +49,7 @@ public class MessageIntentBuilder {
      * @return
      */
     public MessageIntentBuilder enableDialog() {
-        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_BOOT_DIALOG, true);
+        bootIntentBuilder.putExtra(ReceiveMessageActivity.EXTRA_DIALOG_ENABLE, true);
         return this;
     }
 
@@ -55,7 +59,7 @@ public class MessageIntentBuilder {
      * @return
      */
     public MessageIntentBuilder enableStatusbar() {
-        bootIntentBuilder.putExtra(ReceivedMessageProxyService.EXTRA_NOTIFICATION_STATUSBAR, true);
+        bootIntentBuilder.putExtra(ReceiveMessageActivity.EXTRA_STATUSBAR_ENABLE, true);
         return this;
     }
 
@@ -66,6 +70,7 @@ public class MessageIntentBuilder {
      */
     public CommandProtocol.IntentPayload build() {
         sendIntentBuilder.putExtra(EnduroExtensionService.EXTRA_REMOTE_INTENT, bootIntentBuilder.build().toByteArray());
+
         return sendIntentBuilder.build();
     }
 

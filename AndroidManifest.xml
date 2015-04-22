@@ -3,6 +3,7 @@
           package="com.eaglesakura.andriders.enduro">
 
     <application
+        android:name="com.eaglesakura.andriders.enduro.CommunicatorApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -18,7 +19,9 @@
         </activity>
 
         <!-- ダイアログを強制表示するActivity -->
-        <activity android:name="com.eaglesakura.andriders.enduro.DialogActivity">
+        <activity
+            android:name="com.eaglesakura.andriders.enduro.ReceiveMessageActivity_"
+            android:theme="@style/EsMaterial.Transparent">
             <!-- Debug -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -39,9 +42,6 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-
-        <!-- 通知を設定するService -->
-        <service android:name="com.eaglesakura.andriders.enduro.ReceivedMessageProxyService"/>
 
         <!-- ACE常駐Service -->
         <service

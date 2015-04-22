@@ -54,6 +54,10 @@ public class EnduroExtensionService extends AcesExtensionService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if (intent == null) {
+            return super.onStartCommand(intent, flags, startId);
+        }
+
         final String ACTION = intent.getAction();
         if (ACTION.equals(ACTION_SEND_INTENT_TO_ALLMEMBERS)) {
             // 全メンバーに送信する
