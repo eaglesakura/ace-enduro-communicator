@@ -3,7 +3,9 @@ package com.eaglesakura.andriders.enduro;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.WindowManager;
 
 import com.eaglesakura.andriders.enduro.message.MessageItemFragment;
 import com.eaglesakura.android.framework.support.ui.BaseActivity;
@@ -12,6 +14,7 @@ import com.eaglesakura.material.widget.MaterialAlertDialog;
 import com.eaglesakura.util.StringUtil;
 
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.SystemService;
 
 /**
  * 受信したメッセージの表示を行うActivity
@@ -47,21 +50,18 @@ public class ReceiveMessageActivity extends BaseActivity {
      */
     public static final String EXTRA_STATUSBAR_ENABLE = "EXTRA_STATUSBAR_ENABLE";
 
-    /**
-     * ユーザーの表示名
-     */
-    public static final String EXTRA_USER_NAME = "EXTRA_USER_NAME";
+    PowerManager.WakeLock wakeLock;
 
-    /**
-     * ユーザー表示URL
-     */
-    public static final String EXTRA_USER_ICON_URL = "EXTRA_USER_ICON_URL";
-
+    @SystemService
+    PowerManager powerManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+
+        // 最上位レイヤーに表示する
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -72,27 +72,26 @@ public class ReceiveMessageActivity extends BaseActivity {
             }
             transaction.commit();
         }
-//        String message = getIntent().getStringExtra(EXTRA_DIALOG_MESSAGE);
-//        if (StringUtil.isEmpty(message)) {
-//            message = "メッセージが設定されていません";
-//        }
-//
-//        MaterialAlertDialog dialog = new MaterialAlertDialog(this);
-//        dialog.setTitle("チームメッセージ");
-//        dialog.setMessage(message);
-//        dialog.setPositiveButton("閉じる", null);
-//        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-//            @Override
-//            public void onDismiss(DialogInterface dialog) {
-//                finish();
-//            }
-//        });
-//        dialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (wakeLock == null) {
+            wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, "tag" + hashCode());
+            wakeLock.acquire();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        if (wakeLock != null) {
+            wakeLock.release();
+            wakeLock = null;
+        }
 
         // pause時に強制的にActivityを閉じる
         if (!isFinishing()) {

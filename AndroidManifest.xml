@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.eaglesakura.andriders.enduro">
+<manifest package="com.eaglesakura.andriders.enduro"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- System Layer -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
         android:name="com.eaglesakura.andriders.enduro.CommunicatorApplication"
@@ -33,6 +36,13 @@
             <!-- acetrigger://で起動する -->
             <intent-filter>
                 <data android:scheme="acestrigger"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <!-- acesteamorder://で起動する -->
+            <intent-filter>
+                <data android:scheme="acesteamorder"/>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>

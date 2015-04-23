@@ -63,6 +63,16 @@ public class MessageIntentBuilder {
         return this;
     }
 
+
+    /**
+     * 相手端末に送信するIntent本体を生成する
+     *
+     * @return
+     */
+    public CommandProtocol.IntentPayload buildBootIntent() {
+        return bootIntentBuilder.build();
+    }
+
     /**
      * Serviceを起動させるためのRemoteIntentを生成する
      *
