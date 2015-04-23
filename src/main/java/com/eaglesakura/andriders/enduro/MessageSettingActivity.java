@@ -1,7 +1,8 @@
 package com.eaglesakura.andriders.enduro;
 
-import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.eaglesakura.andriders.AcesEnvironment;
@@ -28,15 +29,19 @@ public class MessageSettingActivity extends BaseActivity {
     @ViewById(R.id.Trigger_InputMessage_Commit)
     Button commitButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @ViewById(R.id.Trigger_InputMessage_BootDialog)
+    CompoundButton dialogChecked;
 
+    @Override
+    protected void onAfterViews() {
+        super.onAfterViews();
 
         final String scheme = getIntent().getData().getScheme();
         orderMode = scheme.equals(AcesEnvironment.SCHEMA_TRIGGER_ORDER);
         if (orderMode) {
             commitButton.setText("オーダー送信");
+            dialogChecked.setChecked(false);
+            dialogChecked.setVisibility(View.GONE);
         }
     }
 
@@ -48,6 +53,9 @@ public class MessageSettingActivity extends BaseActivity {
     void commit() {
         MessageIntentBuilder intentBuilder = MessageIntentBuilder.newTriggerMessage(this);
         intentBuilder.message(getInputMessage());
+        if (dialogChecked.isChecked()) {
+            intentBuilder.enableDialog();
+        }
 
         if (orderMode) {
             // チームオーダーとして返す
@@ -60,9 +68,7 @@ public class MessageSettingActivity extends BaseActivity {
             builder.icon(R.drawable.ic_launcher);
 
             // ACEsに起動させるIntentを組み立てる
-            {
-                builder.intent(intentBuilder.build());
-            }
+            builder.intent(intentBuilder.build());
 
             // finish
             builder.finish();

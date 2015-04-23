@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.eaglesakura.andriders.enduro"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.eaglesakura.andriders.enduro"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- System Layer -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="ANDROID.PERMISSION.INTERNET"/>
 
     <application
         android:name="com.eaglesakura.andriders.enduro.CommunicatorApplication"
