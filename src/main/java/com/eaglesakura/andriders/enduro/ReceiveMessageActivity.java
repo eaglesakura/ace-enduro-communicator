@@ -93,9 +93,9 @@ public class ReceiveMessageActivity extends BaseActivity {
             wakeLock = null;
         }
 
-        // pause時に強制的にActivityを閉じる
-        if (!isFinishing()) {
-            finish();
-        }
+//        // pause時に強制的にActivityを閉じる
+//        if (!isFinishing()) {
+//            finish();
+//        }
     }
 }

@@ -5,24 +5,14 @@
     <!-- System Layer -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="ANDROID.PERMISSION.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.eaglesakura.andriders.enduro.CommunicatorApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/Env.AppName"
         android:theme="@style/App.Theme">
-        <activity
-            android:name="com.eaglesakura.andriders.enduro.MainActivity_"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
         <!-- ダイアログを強制表示するActivity -->
         <activity
             android:name="com.eaglesakura.andriders.enduro.ReceiveMessageActivity_"
