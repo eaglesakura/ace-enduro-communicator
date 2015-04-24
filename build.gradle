@@ -19,6 +19,16 @@ dependencies {
     compile 'org.androidannotations:androidannotations-api:3.0.+'
 }
 
+if (!hasProperty("DEBUG_KEYSTORE_PASS")) {
+    ext.DEBUG_KEYSTORE_PASS = ""
+    ext.DEBUG_KEYSTORE_ALIAS_NAME = ""
+    ext.DEBUG_KEYSTORE_ALIAS_PASS = ""
+    ext.RELEASE_KEYSTORE_PASS = ""
+    ext.RELEASE_KEYSTORE_ALIAS_NAME = ""
+    ext.RELEASE_KEYSTORE_ALIAS_PASS = ""
+}
+
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -37,11 +47,38 @@ android {
             java.srcDirs = ['src/main/java']
         }
     }
-    buildTypes {
+
+    // 署名設定
+    signingConfigs {
         debug {
+            storeFile file('../sign/appdebug.jks')
+            storePassword DEBUG_KEYSTORE_PASS
+            keyAlias DEBUG_KEYSTORE_ALIAS_NAME
+            keyPassword DEBUG_KEYSTORE_ALIAS_PASS
         }
 
         release {
+            storeFile file('../sign/apprelease.jks')
+            storePassword RELEASE_KEYSTORE_PASS
+            keyAlias RELEASE_KEYSTORE_ALIAS_NAME
+            keyPassword RELEASE_KEYSTORE_ALIAS_PASS
+        }
+    }
+
+    buildTypes {
+        debug {
+            // デバッグビルド時は"package名+.debug"を入れる
+            applicationIdSuffix ".debug"
+            // デバッグ版署名
+            signingConfig signingConfigs.debug
+
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled false
+            // 署名設定
+            signingConfig signingConfigs.release
         }
     }
 
