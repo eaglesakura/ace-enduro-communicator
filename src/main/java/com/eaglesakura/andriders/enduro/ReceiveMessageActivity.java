@@ -18,9 +18,9 @@ import org.androidannotations.annotations.SystemService;
 
 /**
  * 受信したメッセージの表示を行うActivity
- * <p/>
+ * <br>
  * Intentに従い、「一定時間で消える(Toast)」 or 「ずっと居座る(Dialog)」のどちらかで動作する
- * <p/>
+ * <br>
  * Toastモードの場合、画面タップでも消えるようにしておく。
  */
 @EActivity
