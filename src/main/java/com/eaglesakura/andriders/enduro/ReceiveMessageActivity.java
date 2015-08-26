@@ -1,7 +1,5 @@
 package com.eaglesakura.andriders.enduro;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,8 +8,6 @@ import android.view.WindowManager;
 import com.eaglesakura.andriders.enduro.message.MessageItemFragment;
 import com.eaglesakura.android.framework.support.ui.BaseActivity;
 import com.eaglesakura.android.framework.support.ui.SupportAnnotationUtil;
-import com.eaglesakura.material.widget.MaterialAlertDialog;
-import com.eaglesakura.util.StringUtil;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.SystemService;

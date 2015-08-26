@@ -32,7 +32,7 @@ if (!hasProperty("DEBUG_KEYSTORE_PASS")) {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '23.0.0'
 
     defaultConfig {
         applicationId "com.eaglesakura.andriders.communication"
